@@ -16,6 +16,22 @@
     font-family: Montserrat,sans-serif;
     text-decoration: none;
 }
+
+.btn{
+    margin: 0 auto;
+    width: 169px;
+    height: 63px;
+    padding-top: calc((63px - 32px)/2);
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 32px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    background: #18CFAB;
+}
 /*common styles*/
 /*header*/
 .hero{
@@ -26,6 +42,7 @@
 
 .header-nav-bar{
     background: rgba(94, 93, 88, 0.6);
+    position: sticky;
 }
 
 .header-nav-bar-content{
@@ -91,6 +108,56 @@
 
 .header-nav-list-item-link:hover{
     color: #18CFAB;
+}
+
+.header-slogan-container{
+    margin: 0 auto;
+    padding-top: 264px;
+    padding-bottom: 130px;
+}
+
+.header-slogan-subtitle{
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.header-slogan-subtitle__wordpress{
+    color: #18CFAB;
+}
+
+.header-slogan-title{
+    font-size: 78px;
+    line-height: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.header-slogan-text{
+    font-size: 34px;
+    line-height: 1px;
+    text-align: center;
+    color: #D4D4D4;
+}
+
+.header-button-container{
+    display: flex;
+    justify-content: center;
+    max-width: 30vw;
+}
+
+.header-btn-explore{
+    margin-bottom: 243px;
+    margin-right: 26px;
+}
+
+.header-btn-purchase{
+    margin-bottom: 243px;
+    background: #00CBF6;
 }
 
 /*header*/

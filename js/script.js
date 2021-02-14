@@ -53,16 +53,7 @@ function portfolioImageHover() {
                         <div class="overlay-play-square"></div>
                         </a> <p class="overlay-description">Project name</p
                         ><p class="overlay-category-name">${event.target.dataset.imageCategory[0].toUpperCase() + event.target.dataset.imageCategory.slice(1).replace("-", " ")}</p></div>`)
-                // document.querySelector(".overlay").classList.add("active")
         }
-        // const imageOverlay = document.querySelector(".overlay")
-        //
-        //
-        // portfolioImageContainer.forEach(item => {
-        //     item.addEventListener("mouseleave", event =>{
-        //         imageOverlay.remove()
-        //     })
-        // })
     }));
 }
 
@@ -71,24 +62,6 @@ portfolioImageHover();
 function loadOnButtonClick(){
     const portfolioImageContainer = document.querySelectorAll(".portfolio-image-item");
     let loadingAnimation = document.querySelector(".loader");
-    // function  createElements (element){
-    //     let newElement;
-    //        newElement = document.createElement(element.tag);
-    //        newElement.classList.add(element.class);
-    //        newElement.setAttribute(element.attr,element.attrValue);
-    // }
-
-    // let newELements =[{
-    //     tag: "div",
-    //     class:"portfolio-image-item",
-    // },
-    //     {
-    //      tag: "img",
-    //      class: "portfolio-image",
-    //         attr:"src",
-    //         attrValue:""
-    //     }]
-
     if (document.querySelector(".portfolio-tabs-title.active")) {
         document.addEventListener("click", event => {
             if (event.target.classList.contains("load-btn")) {
@@ -192,3 +165,69 @@ loadOnButtonClick()
 
 
 
+
+
+
+
+let images = [
+    {
+        category: "tab_graphic_design",
+        url: [
+            "./img/portfolio/graphic design/graphic-design1.jpg",
+            "./img/portfolio/graphic design/graphic-design2.jpg",
+            "./img/portfolio/graphic design/graphic-design3.jpg",
+            "./img/portfolio/graphic design/graphic-design4.jpg",
+            "./img/portfolio/graphic design/graphic-design5.jpg",
+            "./img/portfolio/graphic design/graphic-design6.jpg",
+            "./img/portfolio/graphic design/graphic-design7.jpg",
+            "./img/portfolio/graphic design/graphic-design8.jpg"
+        ]
+    },
+    {
+        category: "tab_web_design",
+        url: [
+            "./img/portfolio/web design/web-design1.jpg",
+            "./img/portfolio/web design/web-design2.jpg",
+            "./img/portfolio/web design/web-design3.jpg",
+            "./img/portfolio/web design/web-design4.jpg",
+            "./img/portfolio/web design/web-design5.jpg",
+            "./img/portfolio/web design/web-design6.jpg",
+            "./img/portfolio/web design/web-design7.jpg"
+        ]
+    },
+    {
+        category: "tab_landing_pages",
+        url: [
+            "./img/portfolio/landing page/landing-page1.jpg",
+            "./img/portfolio/landing page/landing-page2.jpg",
+            "./img/portfolio/landing page/landing-page3.jpg",
+            "./img/portfolio/graphic design/graphic-design8.jpg",
+            "./img/portfolio/landing page/landing-page5.jpg",
+            "./img/portfolio/landing page/landing-page6.jpg",
+            "./img/portfolio/landing page/landing-page7.jpg",
+            "./img/portfolio/landing page/landing-page4.jpg",
+        ]
+    },
+    {
+        category: "tab_wordpress",
+        url: [
+            "./img/portfolio/wordpress/wordpress1.jpg",
+            "./img/portfolio/wordpress/wordpress2.jpg",
+            "./img/portfolio/wordpress/wordpress3.jpg",
+            "./img/portfolio/wordpress/wordpress4.jpg",
+            "./img/portfolio/wordpress/wordpress5.jpg",
+            "./img/portfolio/wordpress/wordpress6.jpg",
+            "./img/portfolio/wordpress/wordpress7.jpg",
+            "./img/portfolio/wordpress/wordpress8.jpg"
+        ]
+    }
+]
+// let res = [];
+// const newArr = images.map(item => item.url.slice(0, 3));
+
+let newARR = images.map(item =>{
+    item.category + [item.url]
+})
+console.log(newARR)
+
+console.log(newArr);

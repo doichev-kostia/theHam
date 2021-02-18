@@ -23,15 +23,17 @@ function switchPortfolioTabs(){
 
            event.target.classList.add("active");
             let tabContent = document.querySelectorAll(".portfolio-image-item")
-           tabContent.forEach(item =>{
-               if (item.dataset.imageCategory === event.target.dataset.imageCategory){//! 1 === 2 hidden
+           function tabContentFilter (item,index) {
+               item.hidden = true;
+               if (item.dataset.imageCategory === event.target.dataset.imageCategory) {//! 1 === 2 hidden
                    item.hidden = false;
-               }else if (event.target.textContent.toLowerCase()=== "all"){
-                   item.hidden = false;
-               }else {
-                   item.hidden = true;
+               } else if (event.target.textContent.toLowerCase() === "all") {
+                   if (index < 12){
+                       item.hidden = false;
+                   }
                }
-           })
+           }
+           tabContent.forEach(tabContentFilter);
        }
     });
 }
@@ -78,156 +80,28 @@ function loadOnButtonClick(){
 
 loadOnButtonClick()
 
-// $(document).ready(function(){
-//     let position = 0;
-//     const slidesToShow = 4;
-//     const slidesToScroll = 1;
-//     const carouselContainer = $(".reviews-carousel-author-image-container");
-//     const carouselTrack = $(".reviews-carousel-author-image-track");
-//     const item = $(".reviews-carousel-author-image-item");
-//     const btnPrev = $(".btn-prev");
-//     const btnNext = $(".btn-next");
-//     const itemWidth = carouselContainer.width() / slidesToShow
-//     const movePosition = slidesToShow * itemWidth ;
-//
-//
-//     item.each(function(index, item){
-//         $("item").css({
-//             minWidth: itemWidth,
-//         })
-//     });
-//
-//     btnPrev.click(function(){
-//         position += movePosition;
-//
-//         carouselTrack.css({
-//             transform: `translateX(${position})`
-//         })
-//     });
-//
-//     btnNext.click(function(){
-//         position -= movePosition;
-//
-//         carouselTrack.css({
-//             transform: `translateX(${position})`
-//         })
-//     });
-//
-//
-//
-// });
-    let position = 0;
-    const slidesToShow = 4;
-    const slidesToScroll = 1;
-    const carouselContainer = document.querySelector(".reviews-carousel-author-image-container");
-    const carouselTrack = document.querySelector(".reviews-carousel-author-image-track");
-    const items = document.querySelectorAll(".reviews-carousel-author-image-item");
-    const btnPrev = document.querySelector(".btn-prev");
-    const btnNext = document.querySelector(".btn-next");
-    const itemsCount =  items.length;
-    let itemWidth = carouselContainer.clientWidth / slidesToShow
-    const movePosition = slidesToShow * itemWidth;
-
-    items.forEach((item) =>{
-        item.style.minWidth = `${itemWidth}`
+$(document).ready(function() {
+    $(".reviews-carousel").slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor:".reviews-carousel-nav",
+        autoplay:false,
+        cssEase: "linear"
+    });
+    $(".reviews-carousel-nav").slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        asNavFor:".reviews-carousel",
+        dots: false,
+        centerMode: true,
+        focusOnSelect: true,
+        centerPadding:"0",
+        cssEase: "linear"
     });
 
 
-    btnPrev.addEventListener("click", (event)=>{
-       const itemsLeft = Math.abs(position) / itemWidth;
 
-        position += itemsLeft >= slidesToShow? movePosition :itemsLeft * itemWidth;
+});
 
-        setPosition();
-        checkBtns();
-    });
-
-    btnNext.addEventListener("click",(event) =>{
-        const itemsLeft = itemsCount - (Math.abs(position) + slidesToShow * itemWidth) / itemWidth;
-
-        position += itemsLeft >= slidesToShow? movePosition :itemsLeft * itemWidth;
-
-        setPosition();
-        checkBtns();
-
-    });
-    const setPosition =() =>{
-        carouselTrack.style.transform = `translateX(${position}px)`;
-    };
-
-    const checkBtns = () =>{
-        btnPrev.disabled = position === 0;
-
-        btnNext.disabled = position <= -(itemsCount - slidesToShow) * itemWidth;
-    }
-
-    checkBtns();
-
-
-
-
-
-
-
-let images = [
-    {
-        category: "tab_graphic_design",
-        url: [
-            "./img/portfolio/graphic design/graphic-design1.jpg",
-            "./img/portfolio/graphic design/graphic-design2.jpg",
-            "./img/portfolio/graphic design/graphic-design3.jpg",
-            "./img/portfolio/graphic design/graphic-design4.jpg",
-            "./img/portfolio/graphic design/graphic-design5.jpg",
-            "./img/portfolio/graphic design/graphic-design6.jpg",
-            "./img/portfolio/graphic design/graphic-design7.jpg",
-            "./img/portfolio/graphic design/graphic-design8.jpg"
-        ]
-    },
-    {
-        category: "tab_web_design",
-        url: [
-            "./img/portfolio/web design/web-design1.jpg",
-            "./img/portfolio/web design/web-design2.jpg",
-            "./img/portfolio/web design/web-design3.jpg",
-            "./img/portfolio/web design/web-design4.jpg",
-            "./img/portfolio/web design/web-design5.jpg",
-            "./img/portfolio/web design/web-design6.jpg",
-            "./img/portfolio/web design/web-design7.jpg"
-        ]
-    },
-    {
-        category: "tab_landing_pages",
-        url: [
-            "./img/portfolio/landing page/landing-page1.jpg",
-            "./img/portfolio/landing page/landing-page2.jpg",
-            "./img/portfolio/landing page/landing-page3.jpg",
-            "./img/portfolio/graphic design/graphic-design8.jpg",
-            "./img/portfolio/landing page/landing-page5.jpg",
-            "./img/portfolio/landing page/landing-page6.jpg",
-            "./img/portfolio/landing page/landing-page7.jpg",
-            "./img/portfolio/landing page/landing-page4.jpg",
-        ]
-    },
-    {
-        category: "tab_wordpress",
-        url: [
-            "./img/portfolio/wordpress/wordpress1.jpg",
-            "./img/portfolio/wordpress/wordpress2.jpg",
-            "./img/portfolio/wordpress/wordpress3.jpg",
-            "./img/portfolio/wordpress/wordpress4.jpg",
-            "./img/portfolio/wordpress/wordpress5.jpg",
-            "./img/portfolio/wordpress/wordpress6.jpg",
-            "./img/portfolio/wordpress/wordpress7.jpg",
-            "./img/portfolio/wordpress/wordpress8.jpg"
-        ]
-    }
-]
-// let res = [];
-// const newArr = images.map(item => item.url.slice(0, 3));
-
-let newARR = images.map(item =>{
-    item.category + [item.url]
-})
-console.log(newARR)
-
-console.log(newArr);

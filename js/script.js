@@ -1,40 +1,84 @@
-function switchTabs(){
+//                               === COMMON FUNCTIONS ===
+let loadBtn = document.querySelectorAll(".load-btn");
+loadBtn.forEach(item => {
+    item.addEventListener("click", event => {
+        let loadingAnimation = document.querySelector(".loader");
+        event.target.parentNode.replaceChild(loadingAnimation, event.target);
+        loadingAnimation.hidden = false;
+
+        if (event.target.classList.contains("portfolio-btn")) {
+            const portfolioImageContainer = document.querySelectorAll(".portfolio-image-item");
+            loadImagesOnClick(portfolioImageContainer);
+
+        }
+        // else if (event.target.classList.contains("gallery-btn")) {
+        //     const galleryImages = document.querySelectorAll(".gallery-image-item");
+        //     loadImagesOnClick(galleryImages);
+        //     masonryLayout()
+        // }
+        event.target.remove()
+
+        function loadImagesOnClick(images) {
+            setTimeout(() => {
+                loadingAnimation.hidden = true;
+                images.forEach(item => item.hidden = false);
+            }, 2000);
+        }
+    });
+});
+
+//                               === / COMMON FUNCTIONS ===
+
+//                               === SERVICES ===
+
+function switchServicesTabs() {
     const servicesTabs = document.querySelector(".services-tabs");
-    servicesTabs.addEventListener("click", event =>{
-        if (event.target.classList.contains("services-tab-title")){
+    servicesTabs.addEventListener("click", event => {
+        if (event.target.classList.contains("services-tab-title")) {
             document.querySelectorAll(".services-tab-title").forEach(item => item.classList.remove("active"));
-            document.querySelectorAll(".services-tab-content-item").forEach(item=>item.classList.remove("active"));
+            document.querySelectorAll(".services-tab-content-item").forEach(item => item.classList.remove("active"));
 
             event.target.classList.add("active");
-            document.querySelector(`.${event.target.textContent.toLowerCase().replace(" ","-")}`).classList.add("active");
-            console.log(document.querySelector(`.${event.target.textContent.toLowerCase().replace(" ", "-")}`));
+            document.querySelector(`.${event.target.textContent.toLowerCase().replace(" ", "-")}`).classList.add("active");
+            document.querySelector(`.${event.target.textContent.toLowerCase().replace(" ", "-")}`);
         }
     });
 }
 
-switchTabs();
+switchServicesTabs();
 
-function switchPortfolioTabs(){
-    const portfolioTabs = document.querySelector(".portfolio-tabs")
-    portfolioTabs.addEventListener("click",event =>{
-       if (event.target.classList.contains("portfolio-tabs-title")) {
-           document.querySelectorAll(".portfolio-tabs-title").forEach(item => item.classList.remove("active"));
-           document.querySelectorAll(".portfolio-image-item").forEach(item=>item.classList.remove("active"));
+//                               === / SERVICES ===
 
-           event.target.classList.add("active");
-            let tabContent = document.querySelectorAll(".portfolio-image-item")
-           function tabContentFilter (item,index) {
-               item.hidden = true;
-               if (item.dataset.imageCategory === event.target.dataset.imageCategory) {//! 1 === 2 hidden
-                   item.hidden = false;
-               } else if (event.target.textContent.toLowerCase() === "all") {
-                   if (index < 12){
-                       item.hidden = false;
-                   }
-               }
-           }
-           tabContent.forEach(tabContentFilter);
-       }
+//                               === PORTFOLIO ===
+
+function switchPortfolioTabs() {
+    const portfolioTabs = document.querySelector(".portfolio-tabs");
+    portfolioTabs.addEventListener("click", event => {
+        if (event.target.classList.contains("portfolio-tabs-title")) {
+            document.querySelectorAll(".portfolio-tabs-title").forEach(item => item.classList.remove("active"));
+            document.querySelectorAll(".portfolio-image-item").forEach(item => item.classList.remove("active"));
+
+            event.target.classList.add("active");
+            let tabContent = document.querySelectorAll(".portfolio-image-item");
+
+            function tabContentFilter(item, index) {
+                item.hidden = true;
+                if (item.dataset.imageCategory === event.target.dataset.imageCategory) {
+                    item.hidden = false;
+
+                } else if (event.target.textContent.toLowerCase() === "all") {
+                    const loadButton = document.querySelector(".load-btn.portfolio-btn");
+
+                    if (!loadButton) {
+                        item.hidden = false;
+                    } else if (index < 12) {
+                        item.hidden = false;
+                    }
+                }
+            }
+
+            tabContent.forEach(tabContentFilter);
+        }
     });
 }
 
@@ -54,54 +98,57 @@ function portfolioImageHover() {
                         <a href="#" class="overlay-play link">
                         <div class="overlay-play-square"></div>
                         </a> <p class="overlay-description">Project name</p
-                        ><p class="overlay-category-name">${event.target.dataset.imageCategory[0].toUpperCase() + event.target.dataset.imageCategory.slice(1).replace("-", " ")}</p></div>`)
+                        ><p class="overlay-category-name">${event.target.dataset.imageCategory[0].toUpperCase() + event.target.dataset.imageCategory.slice(1).replace("-", " ")}</p>
+                        </div>`)
         }
     }));
 }
 
 portfolioImageHover();
 
-function loadOnButtonClick(){
-    const portfolioImageContainer = document.querySelectorAll(".portfolio-image-item");
-    let loadingAnimation = document.querySelector(".loader");
-    if (document.querySelector(".portfolio-tabs-title.active")) {
-        document.addEventListener("click", event => {
-            if (event.target.classList.contains("load-btn")) {
-                loadingAnimation.hidden = false;
-                event.target.parentNode.replaceChild(loadingAnimation, event.target);
-                setTimeout(() => {
-                    loadingAnimation.hidden = true;
-                    portfolioImageContainer.forEach(item => item.hidden = false);
-                }, 2000)
-            }
-        });
-    }
-}
+//                               === / PORTFOLIO ===
 
-loadOnButtonClick()
+//                               === REVIEWS ===
 
-$(document).ready(function() {
+$(document).ready(function () {
     $(".reviews-carousel").slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
         fade: true,
-        asNavFor:".reviews-carousel-nav",
-        autoplay:false,
+        asNavFor: ".reviews-carousel-nav",
+        autoplay: false,
         cssEase: "linear"
     });
     $(".reviews-carousel-nav").slick({
         slidesToShow: 4,
         slidesToScroll: 1,
-        asNavFor:".reviews-carousel",
+        asNavFor: ".reviews-carousel",
         dots: false,
         centerMode: true,
         focusOnSelect: true,
-        centerPadding:"0",
+        centerPadding: "0",
         cssEase: "linear"
     });
-
-
-
 });
+
+//                               === / REVIEWS ===
+
+//                               ===  GALLERY ===
+
+function masonryLayout () {
+    const $gallery = $(".gallery-images-container").imagesLoaded(function () {
+        $gallery.masonry({
+            gutter: 6,
+            itemSelector: ".gallery-image-item",
+            singleMode: false,
+            isResizable: true,
+            isAnimated: true
+        });
+    });
+}
+
+masonryLayout()
+
+//                               === / GALLERY ===
 
